@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Babel JavaScript," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
 
@@ -79,18 +79,14 @@
 
 
 
-<meta name="description" content="什么是Babel？总的来说，Babel是一个通用的多用途JavaScript编辑器。通过Babel你可以使用（并创建）下一代的JavaScript，以及JavaScript工具。 每年JavaScript新的标准/提案和新的特性层出不穷，但这些标准得到支持却需要时间，而Babel可以让你提前（甚至数年）使用它们。 Babel把用户编写的“超前”的代码向下编译成已经被普及的版本，即随处可用的版本。这">
-<meta name="keywords" content="Babel JavaScript">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Babel快速入门">
-<meta property="og:url" content="http://yoursite.com/2018/05/06/babel-usage/index.html">
+<meta property="og:title" content="浏览器event loop">
+<meta property="og:url" content="http://yoursite.com/2018/05/31/event-loop/index.html">
 <meta property="og:site_name" content="Jetin&#39;s Blog">
-<meta property="og:description" content="什么是Babel？总的来说，Babel是一个通用的多用途JavaScript编辑器。通过Babel你可以使用（并创建）下一代的JavaScript，以及JavaScript工具。 每年JavaScript新的标准/提案和新的特性层出不穷，但这些标准得到支持却需要时间，而Babel可以让你提前（甚至数年）使用它们。 Babel把用户编写的“超前”的代码向下编译成已经被普及的版本，即随处可用的版本。这">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-25T03:11:44.000Z">
+<meta property="og:updated_time" content="2018-05-31T10:46:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Babel快速入门">
-<meta name="twitter:description" content="什么是Babel？总的来说，Babel是一个通用的多用途JavaScript编辑器。通过Babel你可以使用（并创建）下一代的JavaScript，以及JavaScript工具。 每年JavaScript新的标准/提案和新的特性层出不穷，但这些标准得到支持却需要时间，而Babel可以让你提前（甚至数年）使用它们。 Babel把用户编写的“超前”的代码向下编译成已经被普及的版本，即随处可用的版本。这">
+<meta name="twitter:title" content="浏览器event loop">
 
 
 
@@ -120,13 +116,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/06/babel-usage/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/31/event-loop/"/>
 
 
 
 
 
-  <title>Babel快速入门 | Jetin's Blog</title>
+  <title>浏览器event loop | Jetin's Blog</title>
   
 
 
@@ -253,7 +249,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/06/babel-usage/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/31/event-loop/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jetin">
@@ -270,7 +266,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Babel快速入门</h1>
+          <h1 class="post-title" itemprop="name headline">浏览器event loop</h1>
         
 
         <div class="post-meta">
@@ -282,8 +278,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-06T13:16:19+08:00">
-                2018-05-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-31T18:46:06+08:00">
+                2018-05-31
               </time>
             
 
@@ -320,49 +316,7 @@
       
 
       
-        <p>什么是Babel？总的来说，Babel是一个通用的多用途JavaScript编辑器。通过Babel你可以使用（并创建）下一代的JavaScript，以及JavaScript工具。</p>
-<p>每年JavaScript新的标准/提案和新的特性层出不穷，但这些标准得到支持却需要时间，而Babel可以让你提前（甚至数年）使用它们。</p>
-<p>Babel把用户编写的“超前”的代码向下编译成已经被普及的版本，即随处可用的版本。这一过程叫做“源码”到“源码”的编译，也被成为“转译”，即转换加编译。</p>
-<p>例如，Babel能将以下ES2015新的箭头函数语法：</p>
-<pre><code>const square = n =&gt; n * n;
-</code></pre><p>转译为：</p>
-<pre><code>var square = function(n) {
-    return n * n;
-}
-</code></pre><p>Babel还支持语法扩展，比如React所用的JSX语法。同时还支持静态类型检查的流式语法（Flow Syntax）。</p>
-<p>Babel将自身分成了数个核心模块，任何人都可以利用这些核心模块去创建自己的插件。至于如何去创建一个Babel插件，我将写在在下一篇文章中。</p>
-<h3 id="安装Babel"><a href="#安装Babel" class="headerlink" title="安装Babel"></a>安装Babel</h3><h4 id="Babel-Cli"><a href="#Babel-Cli" class="headerlink" title="Babel-Cli"></a>Babel-Cli</h4><p>虽然可以在全局环境中安装Babel-Cli，但是根据单个项目，进行<strong>本地</strong>安装会更好一些。这么做的主要原因是：</p>
-<pre><code>1. 同一机器上的不同的项目可以依赖不同版本的 Babel, 这允许你一次更新一个项目。
-2. 这意味着在你的工作环境中没有隐含的依赖项。它将使你的项目更方便移植、更易于安装。
-</code></pre><p>我们可以通过以下命令本地安装 Babel CLI:</p>
-<p>   $ npm install –save-dev babel-cli</p>
-<p>安装完成之后，你的<code>package.json</code>文件应该是这样的：</p>
-<pre><code>{
-    &quot;devDependencies&quot;: {
-</code></pre><ul>
-<li>“babel-cli”: “^6.0.0”<br>}<br>}</li>
-</ul>
-<p>我们可以这样来编译我们的第一个文件：</p>
-<pre><code>$ babel my-file.js
-</code></pre><p>这将把编译后的结果直接输入到终端。如果想要将结果输出到指定的文件中，则需要加上<code>--out-file</code>或者<code>-o</code>：</p>
-<pre><code>$ babel example.js --out-file compiled.js
-# 或
-$ babel example.js -o compiled.js
-</code></pre><p>如果想要把整个目录编译成一个新的目录，则可以使用<code>--out-dir</code>或者<code>-d</code>:</p>
-<pre><code>$ babel src --out-dir lib
-# 或
-$ babel src --out-dir lib
-</code></pre><p>我们将把我们的指令放在<code>npm script</code>中，而不是通过命令行直接执行的形式。只需要简单地在你的<code>package.json</code>文件中，添加一个<code>scripts</code>属性，并把babel命令放在它的<code>build</code>属性中。</p>
-<p>  {<br>    “name”: “my-project”,<br>    “version”: “1.0.0”,</p>
-<ul>
-<li>“scripts”: {</li>
-<li>“build”: “babel src -d lib”</li>
-<li>},<br>“devDependencies”: {<br>  “babel-cli”: “^6.0.0”<br>}<br>}</li>
-</ul>
-<p>现在，我们就可以通过在终端中执行以下命令：</p>
-<p>   $ npm build</p>
-<p>这将以和之前一样的方式运行Babel，只不过这次我们是通过本地的副本。</p>
-<h4 id="Register-hook"><a href="#Register-hook" class="headerlink" title="Register hook"></a>Register hook</h4>
+        
       
     </div>
     
@@ -377,12 +331,6 @@ $ babel src --out-dir lib
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/Babel-JavaScript/" rel="tag"># Babel JavaScript</a>
-          
-        </div>
-      
 
       
       
@@ -392,15 +340,15 @@ $ babel src --out-dir lib
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/05/06/babel-usage/" rel="next" title="Babel快速入门">
+                <i class="fa fa-chevron-left"></i> Babel快速入门
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/31/event-loop/" rel="prev" title="浏览器event loop">
-                浏览器event loop <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -452,17 +400,8 @@ $ babel src --out-dir lib
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -517,22 +456,6 @@ $ babel src --out-dir lib
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Babel"><span class="nav-number">1.</span> <span class="nav-text">安装Babel</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Babel-Cli"><span class="nav-number">1.1.</span> <span class="nav-text">Babel-Cli</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Register-hook"><span class="nav-number">1.2.</span> <span class="nav-text">Register hook</span></a></li></ol></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
